@@ -1,0 +1,130 @@
+<mat-card>
+  <div *ngIf="vehicle">
+    <h2> {{ vehicle.plate }}</h2>
+
+    <div class="filter-container">
+
+      <mat-form-field appearance="outline">
+        <mat-label class="custom-header1">Σειρά-Αριθμός</mat-label>
+        <input matInput placeholder="Αναζήτηση Σειρά-Αριθμού" [(ngModel)]="serialNumberFilter" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label class="custom-header1">Οδηγός</mat-label>
+        <mat-select [(ngModel)]="selectedDriver" class="custom-header1">
+          <mat-option value="">Όλοι οι Οδηγοί</mat-option>
+          <mat-option *ngFor="let driver of drivers" [value]="driver.id">
+            {{ driver.fullName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label class="custom-header1">Ημερομηνία</mat-label>
+        <mat-date-range-input [rangePicker]="picker" class="custom-header1">
+          <input matStartDate placeholder="Από" [(ngModel)]="startDate">
+          <input matEndDate placeholder="Μέχρι" [(ngModel)]="endDate">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Κατάσταση </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-chip
+            [ngClass]="{
+              'approved-chip': element.isApproved,
+              'cancelled-chip': !element.isApproved
+            }"
+            selected>
+            {{ element.isApproved ? 'Εγκεκριμένο' : 'Ακυρωμένο' }}
+          </mat-chip>
+        </td>
+      </ng-container>
+
+
+      <button mat-raised-button color="primary" (click)="applyFilters()">Αναζήτηση</button>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+      <ng-container matColumnDef="serialNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header2"> Σειρά-Αριθμός </th>
+        <td mat-cell *matCellDef="let element" class="custom-header2"> {{ element.serialNumber }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="driver">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header2"> Οδηγός </th>
+        <td mat-cell *matCellDef="let element" class="custom-header2"> {{ element.fullName }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="issueDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header2"> Ημερομηνία </th>
+        <td mat-cell *matCellDef="let element" class="custom-header2"> {{ element.issueDate | date: 'yyyy-MM-dd' }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header2"> Κατάσταση </th>
+        <td mat-cell *matCellDef="let element" class="custom-header2">
+          <mat-chip [color]="element.isApproved ? 'primary' : 'warn'" selected >
+            {{ element.isApproved ? 'Εγκεκριμένο' : 'Ακυρωμένο' }}
+          </mat-chip>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="rewardScale">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header2"> Κλίμακα επιβράβευσης </th>
+        <td mat-cell *matCellDef="let element" class="custom-header2"> {{ element.tierAmount | number: '1.2-2' }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="entryAmount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header2"> Ποσό καταχώρησης </th>
+        <td mat-cell *matCellDef="let element" class="custom-header2"> {{ element.registrationAmount | currency: 'EUR' }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="consumptionAmount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header2"> Ποσό κατανάλωσης </th>
+        <td mat-cell *matCellDef="let element" class="custom-header2"> {{ element.consumptionAmount | number: '1.2-2' }} Kg </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="rewardAmount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header2"> Ποσό επιβράβευσης </th>
+        <td mat-cell *matCellDef="let element" class="custom-header2"> {{ element.rewardAmount | currency: 'EUR' }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="custom-header2"> Ενέργειες </th>
+        <td mat-cell *matCellDef="let element" class="custom-header2">
+          <button mat-raised-button color="primary" (click)="editRecord(element)">Επεξεργασία</button>
+          <button mat-raised-button color="warn" (click)="deleteRecord(element)">Διαγραφή</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div class="center-content">
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+  <div class="center-content">
+    <button mat-raised-button color="accent" [routerLink]="'/'">Back to Vehicle List</button>
+  </div>
+</mat-card>
+
+<div *ngIf="!vehicle">
+  <mat-card>
+    <p>No vehicle found with the specified ID.</p>
+  </mat-card>
+</div>

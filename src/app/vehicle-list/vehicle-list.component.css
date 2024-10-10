@@ -1,0 +1,136 @@
+.mat-elevation-z8 {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+
+.filter-container {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+th.mat-header-cell, td.mat-cell {
+  color: #333333;
+}
+
+th.mat-header-cell {
+  background-color: #dfaaaa;
+  font-weight: bold;
+}
+
+tr.mat-row:hover {
+  background-color: #e8e8e8 !important;
+}
+
+mat-chip {
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+mat-chip[color="primary"] {
+  background-color: #4caf50;
+}
+
+mat-chip[color="warn"] {
+  background-color: #f44336;
+}
+
+button.mat-raised-button {
+  border-radius: 20px;
+  margin-top: 8px;
+  color: white;
+}
+
+button[color="primary"] {
+  background-color: #4caf50;
+}
+
+button[color="warn"] {
+  background-color: #f44336;
+}
+
+button[color="accent"] {
+  background-color: #1a8734;
+}
+
+button[color="accent"]:hover {
+  opacity: 0.8;
+}
+
+.center-content button {
+  background-color: #1662d3;
+  color: white;
+  margin-top: 16px;
+  border-radius: 20px;
+}
+
+.mat-paginator {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.mat-paginator .mat-select-trigger,
+.mat-paginator .mat-paginator-range-label {
+  color: #666;
+}
+
+.mat-paginator .mat-icon-button {
+  color: #333;
+}
+
+mat-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+h2 {
+  color: #1662d3;
+}
+
+::ng-deep mat-table {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+::ng-deep .mat-elevation-z8 {
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+::ng-deep .table-container {
+  padding: 16px;
+  margin: 0 auto;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.table-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+::ng-deep .mat-paginator .mat-paginator-icon {
+  color: #333;
+}
+
+.custom-header1 {
+  color: #371aa9;
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.custom-header2 {
+  color: #1662d3;
+  font-weight: bold;
+  font-size: 1.2em;
+}
