@@ -5,9 +5,10 @@
     <div class="filter-container">
 
       <mat-form-field appearance="outline">
-        <mat-label class="custom-header1">Σειρά-Αριθμός</mat-label>
+        <mat-label class="custom-header1">Σειριακός Αριθμός </mat-label>
         <input matInput placeholder="Αναζήτηση Σειρά-Αριθμού" [(ngModel)]="serialNumberFilter" />
       </mat-form-field>
+
 
       <mat-form-field appearance="outline">
         <mat-label class="custom-header1">Οδηγός</mat-label>
@@ -19,6 +20,7 @@
         </mat-select>
       </mat-form-field>
 
+
       <mat-form-field appearance="outline">
         <mat-label class="custom-header1">Ημερομηνία</mat-label>
         <mat-date-range-input [rangePicker]="picker" class="custom-header1">
@@ -29,19 +31,15 @@
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
 
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Κατάσταση </th>
-        <td mat-cell *matCellDef="let element">
-          <mat-chip
-            [ngClass]="{
-              'approved-chip': element.isApproved,
-              'cancelled-chip': !element.isApproved
-            }"
-            selected>
-            {{ element.isApproved ? 'Εγκεκριμένο' : 'Ακυρωμένο' }}
-          </mat-chip>
-        </td>
-      </ng-container>
+
+      <mat-form-field appearance="outline">
+        <mat-label  class="custom-header1">Κατάσταση</mat-label>
+        <mat-select [(ngModel)]="selectedStatus"class="custom-header1">
+          <mat-option value="">Όλες</mat-option>
+          <mat-option value="approved">Εγκεκριμένο</mat-option>
+          <mat-option value="cancelled">Ακυρωμένο</mat-option>
+        </mat-select>
+      </mat-form-field>
 
 
       <button mat-raised-button color="primary" (click)="applyFilters()">Αναζήτηση</button>
@@ -50,7 +48,7 @@
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
       <ng-container matColumnDef="serialNumber">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header2"> Σειρά-Αριθμός </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header2"> Σειριακός Αριθμός </th>
         <td mat-cell *matCellDef="let element" class="custom-header2"> {{ element.serialNumber }} </td>
       </ng-container>
 
@@ -69,12 +67,19 @@
 
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header2"> Κατάσταση </th>
-        <td mat-cell *matCellDef="let element" class="custom-header2">
-          <mat-chip [color]="element.isApproved ? 'primary' : 'warn'" selected >
+        <td mat-cell *matCellDef="let element">
+          <mat-chip
+            [ngClass]="{
+              'approved-chip': element.isApproved,
+              'cancelled-chip': !element.isApproved
+            }"
+            selected
+          >
             {{ element.isApproved ? 'Εγκεκριμένο' : 'Ακυρωμένο' }}
           </mat-chip>
         </td>
       </ng-container>
+
 
 
       <ng-container matColumnDef="rewardScale">

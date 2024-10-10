@@ -42,18 +42,19 @@ th.mat-header-cell {
 }
 
 mat-chip {
-  border-radius: 20px;
   color: white;
   font-weight: bold;
   padding: 4px 8px;
 }
 
-.approved-chip {
-  background-color: #4caf50;
+::ng-deep mat-chip.approved-chip {
+  background-color: #4caf50 !important; /* Green background for approved */
+  color: white !important;
 }
 
-.cancelled-chip {
-  background-color: #f44336;
+::ng-deep mat-chip.cancelled-chip {
+  background-color: #f44336 !important; /* Red background for cancelled */
+  color: white !important;
 }
 
 

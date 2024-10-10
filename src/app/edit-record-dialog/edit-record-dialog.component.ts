@@ -15,42 +15,42 @@ import { MatNativeDateModule } from '@angular/material/core';
   standalone: true,
   imports:[MatNativeDateModule,MatDatepickerModule,MatSelectModule,MatTableModule,MatInputModule,CommonModule,FormsModule],
   template: `
-    <h1 mat-dialog-title>Edit Record</h1>
+    <h1 mat-dialog-title>Επεξεργασία εγγραφής </h1>
     <div mat-dialog-content>
       <mat-form-field appearance="fill">
-        <mat-label>Serial Number</mat-label>
+        <mat-label>Σειριακός Αριθμός</mat-label>
         <input matInput [(ngModel)]="data.record.serialNumber">
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Issue Date</mat-label>
+        <mat-label>Ημερομηνία</mat-label>
         <input matInput [matDatepicker]="picker" [(ngModel)]="data.record.issueDate">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Reward Amount</mat-label>
+        <mat-label>Ποσό Επιβράβευσης </mat-label>
         <input matInput [(ngModel)]="data.record.rewardAmount">
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Driver</mat-label>
+        <mat-label>Οδηγός</mat-label>
         <input matInput [(ngModel)]="data.record.fullName">
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Reward Scale</mat-label>
+        <mat-label>Κλίμακα επιβράβευσης</mat-label>
         <input matInput [(ngModel)]="data.record.tierAmount">
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Entry Amount</mat-label>
+        <mat-label>Ποσό καταχώρησης</mat-label>
         <input matInput [(ngModel)]="data.record.registrationAmount">
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Consumption Amount</mat-label>
+        <mat-label>Ποσό κατανάλωσης</mat-label>
         <input matInput [(ngModel)]="data.record.consumptionAmount">
       </mat-form-field>
 
